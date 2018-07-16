@@ -1,0 +1,139 @@
+<div class="row" *ngIf="!dataCtrl.mode.reqError" style="margin:10px 10px 50px 30px;">
+
+  <div class="container-fluid col-md-12" style="margin-top:10px;">
+    <h4><strong>Repository Name: </strong>{{ dataCtrl.repo.name }}</h4>
+    <hr>
+  </div>
+  <div class="container-fluid col-md-5" style="text-align:left;margin-top:20px;max-height: 800px">
+    <h5><strong>Details</strong></h5>
+    <div class="col-md-12" style="margin-top: 80px;">
+
+      <table class="table tbl-stl table-sm" border="0" style="width: 100%; text-align: left">
+        <tr class="tbl-row">
+          <td class="longtext">Owner Username: </td>
+          <td class="longtext">{{ dataCtrl.repo.owner.login }}</td>
+        </tr>
+        <tr class="tbl-row">
+          <td class="longtext" style="width: 30%;">ULR: </td>
+          <td class="longtext"><a href="{{ dataCtrl.repo.html_url }}">{{ dataCtrl.repo.html_url }}</a></td>
+        </tr>
+        <tr class="tbl-row">
+          <td class="longtext">Description: </td>
+          <td class="longtext">{{ dataCtrl.repo.description }}</td>
+        </tr>
+        <tr class="tbl-row">
+          <td class="longtext">Forks Count: </td>
+          <td class="longtext">{{ dataCtrl.repo.forks_count }}</td>
+        </tr>
+        <tr class="tbl-row">
+          <td class="longtext">Open Issues Count: </td>
+          <td class="longtext">{{ dataCtrl.repo.open_issues_count }}</td>
+        </tr>
+      </table>
+    </div>                          
+  </div>
+
+
+  <div class="container-fluid col-md-6" style="text-align:left;margin-top:20px;max-height: 800px">
+    <h5><strong>Last 5 Issues</strong></h5>
+    <div class="dropdown col-md-12">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-right: 30px;">
+          Select Status
+        </button> <strong>Showing: </strong> {{ filterby }}
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <button class="dropdown-item" (click)="filter('none')" >All</button>
+          <button class="dropdown-item" (click)="filter('open')">Open</button>
+          <button class="dropdown-item" (click)="filter('closed')">Closed</button>
+        </div>
+    </div>
+    <div class="col-md-12" style="margin-top: 10px;" *ngIf="(!issueloader && !moreinfo)">
+      <table class="table tbl-stl table-sm" *ngIf="doneReq" border="0" style="width: 100%; text-align: left">
+        <thead class="thead-inverse">
+          <tr class="hd-clpse" >
+            <th style="width: 15%;" class="tbl-hd-stl">
+              Issue Number
+            </th>
+            <th style="width: 50%;" class="tbl-hd-stl">
+              Created
+            </th>  
+            <th style="width: 30%;" class="tbl-hd-stl">
+                Status
+            </th>                  
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="tbl-row" *ngFor="let issue of issues">
+            <td class="longtext"> {{ issue.number }} </td>
+            <td class="longtext"> {{ issue.created_at }} </td>
+            <td class="longtext"> {{ issue.state }} </td>
+            <td style="border-right:none; text-align: center;" class="end-col">
+              <div>
+                <button (click)="viewData(issue);" class="btn btn-dark btn-sm"><i class="fa fa-list"></i></button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>      
+    </div> 
+    
+
+
+
+    <div class="col-md-12" style="margin-top: 10px;" *ngIf="moreinfo && !issueloader">
+      <table class="table tbl-stl table-sm" border="0" style="width: 100%; text-align: left">
+        <tr class="tbl-row">
+          <td class="longtext">Author Association: </td>
+          <td class="longtext">{{ issue.author_association }}</td>
+        </tr>
+        <tr class="tbl-row">
+          <td class="longtext">Title: </td>
+          <td class="longtext">{{ issue.title }}</td>
+        </tr>
+        <tr class="tbl-row">
+          <td class="longtext" style="width: 30%;">ULR: </td>
+          <td class="longtext"><a href="{{ issue.html_url }}">{{ issue.html_url }}</a></td>
+        </tr>
+        <tr class="tbl-row">
+          <td class="longtext">Details: </td>
+          <td class="longtext">{{ issue.body }}</td>
+        </tr>
+        <tr class="tbl-row">
+          <td class="longtext">Status: </td>
+          <td class="longtext">{{ issue.state }}</td>
+        </tr>
+      </table>
+      <button type="button" class="btn btn-dark" style="margin: auto; width:100px;margin-top: 20px;"(click)="done()">Done</button>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <div class="row" *ngIf="issueloader" style="text-align:center; margin-top:100px;">
+      <div class="col-md-12">
+        <i class="fa fa-spinner fa-spin" style="font-size:100px"></i>
+        <p>loading...</p>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+<div class="row" *ngIf="!dataCtrl.mode.reqError" style="">
+  <div class="container-fluid col-md-5" style="text-align:left;margin-top:20px;max-height: 800px">
+    <app-chart></app-chart>
+  </div>
+  <div class="container-fluid col-md-5" style="text-align: center;margin-top:20px;margin-bottom:20px; max-height: 800px">
+    <button type="button" class="btn btn-dark" style="margin: auto; width:250px;margin-top: 100px;"(click)="back()">Back</button>
+  </div>
+</div>
