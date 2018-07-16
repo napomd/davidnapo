@@ -1,0 +1,71 @@
+<div class="row" *ngIf="!dataCtrl.mode.reqError" style="margin:10px 10px 50px 30px;">
+
+  <div class="col-md-12" style="margin-top: 50px;">
+    <h5><strong>Search Repository</strong></h5>
+  </div>
+  <div class="col-md-5" style="margin-top: 10px;">
+      <div class="input-group mb-3">
+          <input type="text" class="form-control" [(ngModel)]="repo" placeholder="Repository name" aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-dark" type="button" [disabled]="repo.length==0" (click)="search()">Search</button>
+          </div>
+      </div>
+  </div>
+
+  <div *ngIf="data.items" class="container-fluid" style="margin-top: 20px;">
+    <table class="table tbl-stl table-sm" border="0" style="width: 100%; text-align: left">
+      <thead class="thead-inverse">
+        <tr class="hd-clpse" >
+          <th style="width: 35%;" class="tbl-hd-stl">
+            Repo
+          </th>
+          <th style="width: 60%;" class="tbl-hd-stl">
+            Owner
+          </th>                    
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="tbl-row" *ngFor="let repo of data.items">
+          <td class="longtext">{{ repo.name }}</td>
+          <td class="longtext">{{ repo.owner.login }}</td>
+          <td style="border-right:none; text-align: center;" class="end-col">
+            <div>
+              <button (click)="viewData(repo);" class="btn btn-dark btn-sm"><i class="fa fa-list"></i></button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>                                               
+  </div>
+</div>
+
+
+
+
+
+<!--<div class="talk-bubble tri-right  round btm-left-in">
+  <div class="talktext">
+    <p>This is a test david dfghskldfvjbfsdlkbjl klvjodbfkjodfbkofdk ;olfskgodsfrkhbodrftkhbdpogfkopgfbkjopzxdssflksdjfklsdjfklsdfjkldsfjkl xkvfjsdklfvjslkvjsldv</p>
+    <p>dsjfhdskljflsdfjklfjlkdjf</p>
+    <br>
+    <p>dsfjkhdklsjlkf</p>
+  </div>
+</div>
+
+
+<div class="talk-bubble tri-right round right-in">
+    <div class="talktext">
+        <p>This is a test david dfghskldfvjbfsdlkbjl klvjodbfkjodfbkofdk ;olfskgodsfrkhbodrftkhbdpogfkopgfbkjopzxdssflksdjfklsdjfklsdfjkldsfjkl xkvfjsdklfvjslkvjsldv</p>
+        <p>dsjfhdskljflsdfjklfjlkdjf</p>
+        <br>
+        <p>dsfjkhdklsjlkf</p>
+    </div>
+</div>
+
+
+<div class="input-group mb-3" style="margin: 40px;width:80%;">
+  <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button">Button</button>
+  </div>
+</div>-->
