@@ -1,0 +1,21 @@
+<div class="my-container">
+    <ngx-loading [show]="dataCtrl.mode.loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+  
+    <div *ngIf="dataCtrl.mode.menu">
+      <app-menu [dataCtrl]="dataCtrl"></app-menu>
+    </div>
+  
+    <div *ngIf="dataCtrl.mode.home">
+      <app-home [dataCtrl]="dataCtrl"></app-home>
+    </div>
+
+    <div *ngIf="dataCtrl.mode.details">
+      <app-details [dataCtrl]="dataCtrl"></app-details>
+    </div>
+
+  
+    
+  
+  
+  
+  </div>
